@@ -25,6 +25,10 @@ public class Planet {
 	public Planet() {
 	}
 
+	public Planet(String name) {
+		this.name = name;
+	}
+	
 	public Planet(Long id, String name) {
 		this.id = id;
 		this.name = name;
@@ -85,5 +89,10 @@ public class Planet {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Planet [name=" + name + "]";
 	}
 }

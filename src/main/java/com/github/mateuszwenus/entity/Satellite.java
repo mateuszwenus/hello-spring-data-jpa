@@ -19,6 +19,10 @@ public class Satellite {
 	
 	public Satellite() {
 	}
+	
+	public Satellite(String name) {
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;
@@ -67,5 +71,10 @@ public class Satellite {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Satellite [name=" + name + "]";
 	}
 }
