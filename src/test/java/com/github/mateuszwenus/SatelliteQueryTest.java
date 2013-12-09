@@ -24,7 +24,7 @@ public class SatelliteQueryTest extends TestSupport {
 
 	@Autowired
 	private SatelliteRepository satelliteRepository;
-	
+
 	@Test
 	public void shouldFindSatelliteByPropertyEq() {
 		// when
@@ -33,7 +33,7 @@ public class SatelliteQueryTest extends TestSupport {
 		assertThat(satellite, is(notNullValue()));
 		assertThat(satellite.getName(), is(MOON));
 	}
-	
+
 	@Test
 	public void shouldFindSatellitesByPropertyEndsWith() {
 		// when
@@ -42,7 +42,7 @@ public class SatelliteQueryTest extends TestSupport {
 		assertThat(satellites, is(notNullValue()));
 		assertThat(satellites, containsInAnyOrder(satellite(PHOBOS), satellite(DEIMOS)));
 	}
-	
+
 	@Test
 	public void shouldFindSatellitesByPlanetProperty() {
 		// when

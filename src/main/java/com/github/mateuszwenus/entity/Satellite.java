@@ -16,10 +16,10 @@ public class Satellite {
 	@JoinColumn(name = "planet_id")
 	private Planet planet;
 	private String name;
-	
+
 	public Satellite() {
 	}
-	
+
 	public Satellite(String name) {
 		this.name = name;
 	}

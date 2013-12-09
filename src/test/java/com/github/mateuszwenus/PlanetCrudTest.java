@@ -66,7 +66,7 @@ public class PlanetCrudTest extends TestSupport {
 		assertThat(numberOfPlanetsWithName(oldName), is(0));
 		assertThat(numberOfPlanetsWithName(newName), is(1));
 	}
-	
+
 	@Test
 	public void shouldDeleteExistingPlanet() {
 		// when
@@ -75,7 +75,7 @@ public class PlanetCrudTest extends TestSupport {
 		// then
 		assertThat(numberOfPlanetsWithName(MERCURY), is(0));
 	}
-	
+
 	@Test
 	public void shouldDeleteAllPlanets() {
 		// when
@@ -84,7 +84,7 @@ public class PlanetCrudTest extends TestSupport {
 		// then
 		assertThat(countRowsInTable("planets"), is(0));
 	}
-	
+
 	private int numberOfPlanetsWithName(String name) {
 		return countRowsInTableWhere("planets", "name = '" + name + "'");
 	}

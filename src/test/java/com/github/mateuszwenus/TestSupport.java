@@ -17,15 +17,15 @@ public abstract class TestSupport extends AbstractTransactionalJUnit4SpringConte
 	protected static final String MARS = "Mars";
 	protected static final Long JUPITER_ID = 5L;
 	protected static final String JUPITER = "Jupiter";
-	
+
 	protected static final String MOON = "Moon";
 	protected static final String PHOBOS = "Phobos";
 	protected static final String DEIMOS = "Deimos";
-	
+
 	protected Planet planet(String name) {
 		return new Planet(name);
 	}
-	
+
 	protected Satellite satellite(String name) {
 		return new Satellite(name);
 	}

@@ -7,11 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "planets")
+@NamedQuery(name = "Planet.findLighterThanEarth", query = "select p from Planet p where p.massRelativeToEarth < 1")
 public class Planet {
 
 	@Id
@@ -28,7 +30,7 @@ public class Planet {
 	public Planet(String name) {
 		this.name = name;
 	}
-	
+
 	public Planet(Long id, String name) {
 		this.id = id;
 		this.name = name;
@@ -49,19 +51,19 @@ public class Planet {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public BigDecimal getMassRelativeToEarth() {
 		return massRelativeToEarth;
 	}
-	
+
 	public void setMassRelativeToEarth(BigDecimal massRelativeToEarth) {
 		this.massRelativeToEarth = massRelativeToEarth;
 	}
-	
+
 	public Set<Satellite> getSatellites() {
 		return satellites;
 	}
-	
+
 	public void setSatellites(Set<Satellite> satellites) {
 		this.satellites = satellites;
 	}
