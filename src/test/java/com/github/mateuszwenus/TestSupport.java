@@ -2,6 +2,9 @@ package com.github.mateuszwenus;
 
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
+import com.github.mateuszwenus.entity.Planet;
+import com.github.mateuszwenus.entity.Satellite;
+
 public abstract class TestSupport extends AbstractTransactionalJUnit4SpringContextTests {
 
 	protected static final Long MERCURY_ID = 1L;
@@ -18,4 +21,12 @@ public abstract class TestSupport extends AbstractTransactionalJUnit4SpringConte
 	protected static final String MOON = "Moon";
 	protected static final String PHOBOS = "Phobos";
 	protected static final String DEIMOS = "Deimos";
+	
+	protected Planet planet(String name) {
+		return new Planet(name);
+	}
+	
+	protected Satellite satellite(String name) {
+		return new Satellite(name);
+	}
 }

@@ -1,10 +1,10 @@
 package com.github.mateuszwenus;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +28,8 @@ public class PlanetCrudTest extends TestSupport {
 		// when
 		Planet planet = planetRepository.findOne(MERCURY_ID);
 		// then
-		Assert.assertNotNull(planet);
-		Assert.assertEquals(MERCURY, planet.getName());
+		assertThat(planet, is(notNullValue()));
+		assertThat(planet.getName(), is(MERCURY));
 	}
 
 	@Test
@@ -37,8 +37,8 @@ public class PlanetCrudTest extends TestSupport {
 		// when
 		Iterable<Planet> planets = planetRepository.findAll();
 		// then
-		Assert.assertNotNull(planets);
-		assertContains(planets, "Mercury", "Venus", "Earth", "Mars");
+		assertThat(planets, is(notNullValue()));
+		assertThat(planets, containsInAnyOrder(planet(MERCURY), planet(VENUS), planet(EARTH), planet(MARS)));
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class PlanetCrudTest extends TestSupport {
 		planetRepository.save(planet);
 		planetRepository.flush();
 		// then
-		Assert.assertEquals(1, numberOfPlanetsWithName(JUPITER));
+		assertThat(numberOfPlanetsWithName(JUPITER), is(1));
 	}
 
 	@Test
@@ -63,8 +63,8 @@ public class PlanetCrudTest extends TestSupport {
 		planetRepository.save(planet);
 		planetRepository.flush();
 		// then
-		Assert.assertEquals(0, numberOfPlanetsWithName(oldName));
-		Assert.assertEquals(1, numberOfPlanetsWithName(newName));
+		assertThat(numberOfPlanetsWithName(oldName), is(0));
+		assertThat(numberOfPlanetsWithName(newName), is(1));
 	}
 	
 	@Test
@@ -73,7 +73,7 @@ public class PlanetCrudTest extends TestSupport {
 		planetRepository.delete(MERCURY_ID);
 		planetRepository.flush();
 		// then
-		Assert.assertEquals(0, numberOfPlanetsWithName(MERCURY));
+		assertThat(numberOfPlanetsWithName(MERCURY), is(0));
 	}
 	
 	@Test
@@ -82,19 +82,10 @@ public class PlanetCrudTest extends TestSupport {
 		planetRepository.deleteAll();
 		planetRepository.flush();
 		// then
-		Assert.assertEquals(0, countRowsInTable("planets"));
+		assertThat(countRowsInTable("planets"), is(0));
 	}
 	
 	private int numberOfPlanetsWithName(String name) {
 		return countRowsInTableWhere("planets", "name = '" + name + "'");
-	}
-
-	private void assertContains(Iterable<Planet> actualPlanets, String... expectedPlanets) {
-		Set<String> actualPlanetNames = new HashSet<String>();
-		for (Planet p : actualPlanets) {
-			actualPlanetNames.add(p.getName());
-		}
-		Set<String> expectedPlanetNames = new HashSet<String>(Arrays.asList(expectedPlanets));
-		Assert.assertEquals(expectedPlanetNames, actualPlanetNames);
 	}
 }

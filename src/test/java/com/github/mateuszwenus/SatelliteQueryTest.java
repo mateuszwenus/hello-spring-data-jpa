@@ -1,11 +1,12 @@
 package com.github.mateuszwenus;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
-import org.junit.Assert;
+import java.util.Collection;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class SatelliteQueryTest extends TestSupport {
 		// when
 		Satellite satellite = satelliteRepository.findByName(MOON);
 		// then
-		Assert.assertNotNull(satellite);
-		Assert.assertEquals(MOON, satellite.getName());
+		assertThat(satellite, is(notNullValue()));
+		assertThat(satellite.getName(), is(MOON));
 	}
 	
 	@Test
@@ -38,7 +39,8 @@ public class SatelliteQueryTest extends TestSupport {
 		// when
 		Collection<Satellite> satellites = satelliteRepository.findByNameEndingWith("%os");
 		// then
-		assertContains(satellites, PHOBOS, DEIMOS);
+		assertThat(satellites, is(notNullValue()));
+		assertThat(satellites, containsInAnyOrder(satellite(PHOBOS), satellite(DEIMOS)));
 	}
 	
 	@Test
@@ -46,15 +48,7 @@ public class SatelliteQueryTest extends TestSupport {
 		// when
 		Collection<Satellite> satellites = satelliteRepository.findByPlanetName(MARS);
 		// then
-		assertContains(satellites, PHOBOS, DEIMOS);
-	}
-
-	private void assertContains(Collection<Satellite> actualSatellites, String... expectedSatellites) {
-		Set<String> actualSattelitesNames = new HashSet<String>();
-		for (Satellite satellite : actualSatellites) {
-			actualSattelitesNames.add(satellite.getName());
-		}
-		Set<String> expectedSattelitesNames = new HashSet<String>(Arrays.asList(expectedSatellites));
-		Assert.assertEquals(expectedSattelitesNames, actualSattelitesNames);
+		assertThat(satellites, is(notNullValue()));
+		assertThat(satellites, containsInAnyOrder(satellite(PHOBOS), satellite(DEIMOS)));
 	}
 }
