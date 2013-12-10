@@ -12,7 +12,7 @@ public interface SatelliteRepository extends JpaRepository<Satellite, Long> {
 
 	Satellite findByName(String name);
 
-	Collection<Satellite> findByNameEndingWith(String string);
+	Collection<Satellite> findByNameEndingWith(String suffix);
 
 	Collection<Satellite> findByPlanetName(String name);
 }
