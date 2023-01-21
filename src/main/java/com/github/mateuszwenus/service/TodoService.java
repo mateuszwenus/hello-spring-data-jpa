@@ -1,37 +1,42 @@
 package com.github.mateuszwenus.service;
 
 import com.github.mateuszwenus.entity.Todo;
+import com.github.mateuszwenus.entity.TodoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class TodoService {
 
-    private List<Todo> todos = new ArrayList<>();
+    @Autowired
+    private TodoRepository todoRepository;
 
+    @Transactional
     public Todo findById(UUID id) {
-        return todos.stream()
-                .filter(todo -> todo.getId().equals(id))
-                .findFirst()
+        return todoRepository
+                .findById(id)
                 .orElseThrow(() -> new TodoNotFoundException());
     }
 
+    @Transactional
     public List<Todo> findAll() {
-        return todos;
+        return todoRepository.findAll();
     }
 
+    @Transactional
     public Todo createTodo(CreataTodoCmd cmd) {
         Todo todo = new Todo();
-        todo.setId(UUID.randomUUID());
         todo.setTitle(cmd.title());
         todo.setText(cmd.text());
-        todos.add(todo);
+        todoRepository.save(todo);
         return todo;
     }
 
+    @Transactional
     public Todo updateTodo(UpdateTodoCmd cmd) {
         Todo todo = findById(cmd.id());
         todo.setTitle(cmd.title());
@@ -39,11 +44,13 @@ public class TodoService {
         return todo;
     }
 
+    @Transactional
     public void deleteTodo(DeleteTodoCmd cmd) {
-        todos.removeIf(todo -> todo.getId().equals(cmd.id()));
+        todoRepository.deleteById(cmd.id());
     }
 
+    @Transactional
     public void deleteAll() {
-        todos.clear();
+        todoRepository.deleteAll();
     }
 }

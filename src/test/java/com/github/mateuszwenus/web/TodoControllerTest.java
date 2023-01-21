@@ -1,14 +1,9 @@
 package com.github.mateuszwenus.web;
 
-import static io.restassured.RestAssured.*;
-
 import com.github.mateuszwenus.entity.Todo;
 import com.github.mateuszwenus.service.CreataTodoCmd;
 import com.github.mateuszwenus.service.TodoService;
 import io.restassured.http.ContentType;
-
-import static org.hamcrest.Matchers.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +12,9 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 
 import java.util.UUID;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TodoControllerTest {
@@ -44,8 +42,8 @@ public class TodoControllerTest {
                 .log()
                 .all(true)
                 .and()
-                .contentType(ContentType.JSON)
                 .statusCode(is(200))
+                .contentType(ContentType.JSON)
                 .body(is("[]"));
     }
 
@@ -79,8 +77,8 @@ public class TodoControllerTest {
                 .log()
                 .all(true)
                 .and()
-                .contentType(ContentType.JSON)
                 .statusCode(is(200))
+                .contentType(ContentType.JSON)
                 .body("id", notNullValue())
                 .body("title", is(req.getTitle()))
                 .body("text", is(req.getText()));
@@ -99,8 +97,8 @@ public class TodoControllerTest {
                 .log()
                 .all(true)
                 .and()
-                .contentType(ContentType.JSON)
                 .statusCode(is(200))
+                .contentType(ContentType.JSON)
                 .body("[0].id", is(todo.getId().toString()))
                 .body("[0].title", is(todo.getTitle()));
     }
@@ -118,8 +116,8 @@ public class TodoControllerTest {
                 .log()
                 .all(true)
                 .and()
-                .contentType(ContentType.JSON)
                 .statusCode(is(200))
+                .contentType(ContentType.JSON)
                 .body("id", is(todo.getId().toString()))
                 .body("title", is(todo.getTitle()))
                 .body("text", is(todo.getText()));
@@ -141,8 +139,8 @@ public class TodoControllerTest {
                 .log()
                 .all(true)
                 .and()
-                .contentType(ContentType.JSON)
                 .statusCode(is(200))
+                .contentType(ContentType.JSON)
                 .body("id", is(todo.getId().toString()))
                 .body("title", is(req.getTitle()))
                 .body("text", is(req.getText()));
