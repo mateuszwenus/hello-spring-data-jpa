@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: overriden-by-env-variable
+    username: overriden-by-env-variable
+    password: overriden-by-env-variable
+

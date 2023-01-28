@@ -3,10 +3,15 @@ hello-spring-data-jpa
 
 ## Running the app
 
-You can run the app using:
+You can run the app with embedded DB using:
 
 ```bash
 mvn spring-boot:run
+```
+
+You can also run the app with PostgreSQL:
+```bash
+docker compose up
 ```
 
 You can test the running app using curl:
@@ -17,11 +22,5 @@ curl -X POST -H "Content-Type:application/json" -d '{"title":"Improve REST API",
 curl -X GET http://localhost:8080/todos
 curl -X GET http://localhost:8080/todos/<id>
 curl -X PUT -H "Content-Type:application/json" -d '{"title":"Improve REST API", "text":"Use Spring HATEOAS"}' http://localhost:8080/todos/<id>
-```
-
-## Building and running using Docker
-```bash
-docker build -t hello-spring-data-jpa .
-docker run -p 8080:8080 hello-spring-data-jpa
 ```
 

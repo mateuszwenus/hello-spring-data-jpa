@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - spring_profiles_active=POSTGRES
+      - spring_datasource_url=jdbc:postgresql://db:5432/test_db
+      - spring_datasource_username=postgres
+      - spring_datasource_password=password
+  db:
+    image: postgres:15.1
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=test_db
+      - POSTGRES_PASSWORD=password
+    expose:
+      - 5432
+volumes:
+  db-data:
+
