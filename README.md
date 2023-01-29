@@ -14,6 +14,16 @@ You can also run the app with PostgreSQL:
 docker compose up
 ```
 
+You can run the app with embedded DB on minikube using:
+```bash
+docker build -t hello-spring-data-jpa .
+minikube image load hello-spring-data-jpa:latest
+kubectl apply -f k8s/app-deployment.yaml
+kubectl port-forward deployment/hello-spring-data-jpa-app-deployment 8080:8080 &
+```
+
+## Testing the app
+
 You can test the running app using curl:
 
 ```bash
