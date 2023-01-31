@@ -14,8 +14,9 @@ You can also run the app with PostgreSQL:
 docker compose up
 ```
 
-You can run the app with embedded DB on minikube using:
+You can run the app with PostgreSQL on minikube using:
 ```bash
+kubectl apply -f k8s/db-stateful-set.yaml
 docker build -t hello-spring-data-jpa .
 minikube image load hello-spring-data-jpa:latest
 kubectl apply -f k8s/app-deployment.yaml

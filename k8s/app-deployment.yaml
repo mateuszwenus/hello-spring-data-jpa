@@ -17,6 +17,15 @@ spec:
       containers:
       - name: app
         image: hello-spring-data-jpa:latest
+        env:
+        - name: spring_profiles_active
+          value: POSTGRES
+        - name: spring_datasource_url
+          value: jdbc:postgresql://hello-spring-data-jpa-db-svc:5432/test_db
+        - name: spring_datasource_username
+          value: postgres
+        - name: spring_datasource_password
+          value: password
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
