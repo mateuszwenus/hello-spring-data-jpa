@@ -1,6 +1,6 @@
 package com.github.mateuszwenus.web;
 
-import com.github.mateuszwenus.service.CreataTodoCmd;
+import com.github.mateuszwenus.service.CreateTodoCmd;
 import com.github.mateuszwenus.service.TodoNotFoundException;
 import com.github.mateuszwenus.service.TodoService;
 import com.github.mateuszwenus.service.UpdateTodoCmd;
@@ -37,7 +37,7 @@ public class TodoController {
 
     @PostMapping("/todos")
     public TodoDto createTodo(@RequestBody CreateTodoRequest req) {
-        return new TodoDto(todoService.createTodo(new CreataTodoCmd(req.getTitle(), req.getText())));
+        return new TodoDto(todoService.createTodo(new CreateTodoCmd(req.getTitle(), req.getText())));
     }
 
     @ExceptionHandler

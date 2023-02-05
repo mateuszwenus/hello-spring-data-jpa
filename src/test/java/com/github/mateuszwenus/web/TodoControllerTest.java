@@ -1,7 +1,7 @@
 package com.github.mateuszwenus.web;
 
 import com.github.mateuszwenus.entity.Todo;
-import com.github.mateuszwenus.service.CreataTodoCmd;
+import com.github.mateuszwenus.service.CreateTodoCmd;
 import com.github.mateuszwenus.service.TodoService;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
@@ -86,7 +86,7 @@ public class TodoControllerTest {
 
     @Test
     public void shouldReturnListWithCreatedTodoItem() {
-        Todo todo = todoService.createTodo(new CreataTodoCmd("title", "text"));
+        Todo todo = todoService.createTodo(new CreateTodoCmd("title", "text"));
         given()
                 .accept(ContentType.JSON)
                 .log()
@@ -105,7 +105,7 @@ public class TodoControllerTest {
 
     @Test
     public void shouldReturnCreatedTodoItem() {
-        Todo todo = todoService.createTodo(new CreataTodoCmd("title", "text"));
+        Todo todo = todoService.createTodo(new CreateTodoCmd("title", "text"));
         given()
                 .accept(ContentType.JSON)
                 .log()
@@ -125,7 +125,7 @@ public class TodoControllerTest {
 
     @Test
     public void shouldUpdateTodoItem() {
-        Todo todo = todoService.createTodo(new CreataTodoCmd("title", "text"));
+        Todo todo = todoService.createTodo(new CreateTodoCmd("title", "text"));
         UpdateTodoRequest req = new UpdateTodoRequest("title2", "text2");
         given()
                 .contentType(ContentType.JSON)

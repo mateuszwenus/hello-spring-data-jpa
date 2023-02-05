@@ -28,7 +28,7 @@ public class TodoService {
     }
 
     @Transactional
-    public Todo createTodo(CreataTodoCmd cmd) {
+    public Todo createTodo(CreateTodoCmd cmd) {
         Todo todo = new Todo();
         todo.setTitle(cmd.title());
         todo.setText(cmd.text());
